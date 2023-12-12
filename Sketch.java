@@ -31,6 +31,7 @@ public class Sketch extends PApplet {
   int intY = 0;
 
   boolean upPressed = false;
+  boolean dragging = false;
   boolean downPressed = false;
   boolean rightPressed = false;
   boolean leftPressed = false;
@@ -63,7 +64,7 @@ public class Sketch extends PApplet {
    */
   public void draw() {
   
-    if (Password.equals("abc123")) {
+    if (Password.equals("abcdef")) {
       
       Entered = true;
 
@@ -74,13 +75,10 @@ public class Sketch extends PApplet {
 
     // moues pressed variable 
     if (mousePressed) {
-       if (mouseX > 600 && mouseY < 460 && mouseY > 200) {
-        image(imgTallRedFlower,mouseX,mouseY);
+       if (mouseX > 600 && mouseY < 650 && mouseY > 500) {
+        image(imgTallRedFlower, mouseX, mouseY - 150);
       }
-    } else {
-
-     
-  }
+    } 
 
   // limits where the sun can be 
   if (intX > width) {
@@ -138,6 +136,19 @@ public class Sketch extends PApplet {
     }
 }
 
+
+public void mouseMoved() {
+  if (Entered == true) {
+    // moues pressed variable 
+       if (mouseX > 600 && mouseY < 650 && mouseY > 500) {
+        
+        image(imgBlueFlower, mouseX, mouseY - 150);
+      } 
+    } else {
+      
+    }
+}
+    
 public void keyTyped() {
 
   if (Entered == false) {
@@ -158,10 +169,7 @@ public void keyTyped() {
   }
 }
 
-public void mouseClicked() {
-  
 
-}
 
   // key event
   public void keyPressed() {
@@ -236,10 +244,6 @@ public void mouseClicked() {
 
         APressed = false;
   }
-}
-
-public void mouseDragged() {
-  
 }
 
 
