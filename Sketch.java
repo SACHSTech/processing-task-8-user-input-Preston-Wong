@@ -38,6 +38,9 @@ public class Sketch extends PApplet {
   boolean DPressed = false;
   boolean SPressed = false;
   boolean APressed = false;
+  boolean MouseWheelUp = false;
+  Boolean MouseWheelDown = false;
+
 
   String Password = "";
 
@@ -60,7 +63,7 @@ public class Sketch extends PApplet {
    */
   public void draw() {
   
-    if (Password.equals("password")) {
+    if (Password.equals("abc123")) {
       
       Entered = true;
 
@@ -71,19 +74,15 @@ public class Sketch extends PApplet {
 
     // moues pressed variable 
     if (mousePressed) {
-     
+       if (mouseX > 600 && mouseY < 460 && mouseY > 200) {
+        image(imgTallRedFlower,mouseX,mouseY);
+      }
     } else {
-      if (mouseX <= 200 && mouseY <= 200) {
-      
-      } else if (mouseX > 200 && mouseY > 200) {
-      
-      } else if (mouseX > 200 && mouseY <= 200) {
+
      
-      } else if (mouseX <= 200 && mouseY > 200) {
-      
-    }
   }
 
+  // limits where the sun can be 
   if (intX > width) {
     intX = width;
   } else if (intX < 0) {
@@ -92,6 +91,17 @@ public class Sketch extends PApplet {
     intY = 50;
   } else if (intY < 0) {
     intY = 0;
+  }
+
+  // limits the size of the sun
+  if (intSizeX > 40) {
+    intSizeX = 40;
+  } else if (intSizeY > 40) {
+    intSizeY = 40;
+  } else if (intSizeY < -40) {
+    intSizeY = -40;
+  } else if (intSizeX < -40) {
+    intSizeX =  -40;
   }
 
   // handling multiple keys 
@@ -105,7 +115,7 @@ public class Sketch extends PApplet {
     intSizeX += 2;
   }
 
-  // key variable 
+  // key variable are used to change the location of the sun
   if (DPressed == true) {
     intX += 10;
 
@@ -122,7 +132,8 @@ public class Sketch extends PApplet {
  
     } else  {
 
-      text(Password,250,250);
+      fill(255);
+      text(Password, width / 2, height / 2);
 
     }
 }
@@ -226,6 +237,11 @@ public void mouseClicked() {
         APressed = false;
   }
 }
+
+public void mouseDragged() {
+  
+}
+
 
   // define other methods down here.
 }
