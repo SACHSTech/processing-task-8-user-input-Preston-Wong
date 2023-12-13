@@ -92,7 +92,7 @@ public class Sketch extends PApplet {
         image(imgCoinFlower, mouseX - 20, mouseY - 50);
 
       // checks to see if the mouse is over the left most flower bed 
-      } else if (mouseX <= 450 && mouseY > 590 && mouseY <= height) {
+      } else if ((mouseX <= 400 && mouseY > 800 && mouseY <= height) || (mouseX <= 300 && mouseY <= 800 && mouseY > 750 ) || (mouseX <= 200 && mouseY <= 750 && mouseY > 250)) {
 
         image(imgRedFlower, mouseX - 20, mouseY - 50);
 
@@ -201,7 +201,7 @@ public class Sketch extends PApplet {
           image(imgSpiderFlower, mouseX - 20, mouseY - 50);
 
         // checks if the moues is over the left most flower bed 
-        } else if (mouseX <= 450 && mouseY > 590 && mouseY <= height) {
+        } else if ((mouseX <= 400 && mouseY > 800 && mouseY <= height) || (mouseX <= 300 && mouseY <= 800 && mouseY > 750 ) || (mouseX <= 200 && mouseY <= 750 && mouseY > 250)) {
 
           image(imgSunFlower, mouseX - 20, mouseY - 50);
 
