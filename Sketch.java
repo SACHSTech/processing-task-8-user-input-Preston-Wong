@@ -17,6 +17,7 @@ public class Sketch extends PApplet {
    * values here i.e background, stroke, fill etc.
    */
 
+  // all image variables 
   PImage imgGarden;
   PImage imgBlueFlower;
   PImage imgRedFlower;
@@ -25,13 +26,14 @@ public class Sketch extends PApplet {
   PImage imgCoinFlower;
   PImage imgSunFlower;
 
-  int intSizeX = 0;
-  int intSizeY = 0;
-  int intX = 0;
-  int intY = 0;
+  // sun size and location variables 
+  int intSunSizeX = 10;
+  int intSunSizeY = 10;
+  int intSunX = 0;
+  int intSunY = 0;
 
+  // variables that allow the user to adust different aspects of the sun 
   boolean upPressed = false;
-  boolean dragging = false;
   boolean downPressed = false;
   boolean rightPressed = false;
   boolean leftPressed = false;
@@ -39,17 +41,17 @@ public class Sketch extends PApplet {
   boolean DPressed = false;
   boolean SPressed = false;
   boolean APressed = false;
-  boolean MouseWheelUp = false;
-  Boolean MouseWheelDown = false;
 
-
+  // the string for the password 
   String Password = "";
 
+  // is used to determine if the user has enterted into the garden area
   boolean Entered = false;
 
   public void setup() {
+    // gives a black screen when they enter their password to allow the text to be more easily read 
     background(0);
-    imgGarden = loadImage ("_9895870b-c84b-4f5d-a437-99e18ed489df.jpg");
+    imgGarden = loadImage("_9895870b-c84b-4f5d-a437-99e18ed489df.jpg");
     imgBlueFlower = loadImage("blue_flower-removebg-preview.png");
     imgRedFlower = loadImage("red_flower-removebg-preview.png");
     imgTallRedFlower = loadImage("tall_red_flower-removebg-preview.png");
@@ -64,6 +66,7 @@ public class Sketch extends PApplet {
    */
   public void draw() {
   
+    // checks to see if the user has enterted the right password to enter the garden area 
     if (Password.equals("abcdef")) {
       
       Entered = true;
@@ -71,110 +74,172 @@ public class Sketch extends PApplet {
       image(imgGarden,0,0);
 
       fill(255, 223, 34);
-      ellipse(intX,intY,intSizeX,intSizeY);
+
+      ellipse(intSunX,intSunY,intSunSizeX,intSunSizeY);
 
     // moues pressed variable 
     if (mousePressed) {
-       if (mouseX > 600 && mouseY < 650 && mouseY > 500) {
+
+      // checks to see if the mouse is over the right most flower bed 
+      if (mouseX > 600 && mouseY < 630 && mouseY > 500) {
+          
         image(imgTallRedFlower, mouseX, mouseY - 150);
+
+      // checks to see if the mouse is over 1 of the 4 middle flower beds 
+      } else if ((mouseX >= 200 && mouseX < 400 && mouseY >= 500 && mouseY < 600) || (mouseX >= 400 && mouseX < 620 && mouseY >= 550 && mouseY < 700) 
+      || (mouseX >= 620 && mouseX < 800 && mouseY >= 700 && mouseY < 750) || (mouseX >= 800 && mouseX < 930 && mouseY >= 700 && mouseY < 1000)) {
+      
+        image(imgCoinFlower, mouseX - 20, mouseY - 50);
+
+      // checks to see if the mouse is over the left most flower bed 
+      } else if (mouseX <= 450 && mouseY > 590 && mouseY <= height) {
+
+        image(imgRedFlower, mouseX - 20, mouseY - 50);
+
       }
     } 
 
-  // limits where the sun can be 
-  if (intX > width) {
-    intX = width;
-  } else if (intX < 0) {
-    intX = 0;
-  } else if (intY > 50) {
-    intY = 50;
-  } else if (intY < 0) {
-    intY = 0;
-  }
+    // limits where the sun can be 
+    if (intSunX > width) {
 
-  // limits the size of the sun
-  if (intSizeX > 40) {
-    intSizeX = 40;
-  } else if (intSizeY > 40) {
-    intSizeY = 40;
-  } else if (intSizeY < -40) {
-    intSizeY = -40;
-  } else if (intSizeX < -40) {
-    intSizeX =  -40;
-  }
+      intSunX = width;
 
-  // handling multiple keys 
-  if (upPressed == true) {
-    intSizeY += 2;
-  } if (downPressed == true) {
-    intSizeY -= 2;
-  } if (leftPressed == true) {
-    intSizeX -= 2;
-  } if (rightPressed == true) {
-    intSizeX += 2;
-  }
+    } else if (intSunX < 0) {
 
-  // key variable are used to change the location of the sun
-  if (DPressed == true) {
-    intX += 10;
+      intSunX = 0;
 
-  } if (SPressed == true) {
-    intY += 10;
+    } else if (intSunY > 50) {
 
-  } if  (APressed == true) {
-      intX -= 10;
+      intSunY = 50;
+      
+    } else if (intSunY < 0) {
 
-  } if  (WPressed == true) {
-      intY -= 10;
-  }
+      intSunY = 0;
+    }
 
- 
+    // limits the size of the sun
+    if (intSunSizeX > 60) {
+      
+      intSunSizeX = 60;
+
+    } else if (intSunSizeY > 60) {
+      
+      intSunSizeY = 60;
+
+    } else if (intSunSizeY < -60) {
+
+      intSunSizeY = -60;
+
+    } else if (intSunSizeX < -60) {
+
+      intSunSizeX =  -60;
+    }
+
+    // handling multiple keys 
+    if (upPressed == true) {
+
+      intSunSizeY += 2;
+
+    } if (downPressed == true) {
+
+      intSunSizeY -= 2;
+
+    } if (leftPressed == true) {
+
+      intSunSizeX -= 2;
+
+    } if (rightPressed == true) {
+
+      intSunSizeX += 2;
+    }
+
+    // key variable are used to change the location of the sun
+    if (DPressed == true) {
+
+      intSunX += 10;
+
+    } if (SPressed == true) {
+
+      intSunY += 10;
+
+    } if  (APressed == true) {
+
+        intSunX -= 10;
+
+    } if  (WPressed == true) {
+
+        intSunY -= 10;
+    }
+  
     } else  {
 
+      // gives the prompt to the user that they need to enter in a password in order to proceed 
       fill(255);
-      text(Password, width / 2, height / 2);
+      textSize(50);
+      text("Password: " + Password, width / 5, height / 2);
 
     }
-}
+  }
 
 
-public void mouseMoved() {
-  if (Entered == true) {
-    // moues pressed variable 
-       if (mouseX > 600 && mouseY < 650 && mouseY > 500) {
+  // is used to print a different kind of flower 
+  public void mouseMoved() {
+    if (Entered == true) {
+
+      // checks if the mouse is pressed, so that 2 flower don't overlap each other 
+      if (!mousePressed) {
+       
+        // checks if the moues is over the right most flower bed
+        if (mouseX > 600 && mouseY < 630 && mouseY > 500) {
         
-        image(imgBlueFlower, mouseX, mouseY - 150);
-      } 
-    } else {
-      
+          image(imgBlueFlower, mouseX, mouseY - 150);
+
+        // checks if the moues is over 1 of the 4 middle flower beds
+        } else if ((mouseX >= 200 && mouseX < 400 && mouseY >= 500 && mouseY < 600) || (mouseX >= 400 && mouseX < 620 && mouseY >= 550 && mouseY < 700) 
+        || (mouseX >= 620 && mouseX < 800 && mouseY >= 700 && mouseY < 750) || (mouseX >= 800 && mouseX < 930 && mouseY >= 700 && mouseY < 1000)) {
+        
+          image(imgSpiderFlower, mouseX - 20, mouseY - 50);
+
+        // checks if the moues is over the left most flower bed 
+        } else if (mouseX <= 450 && mouseY > 590 && mouseY <= height) {
+
+          image(imgSunFlower, mouseX - 20, mouseY - 50);
+
+        }
+      }
     }
-}
-    
-public void keyTyped() {
+  }
+   
+  // is used to record the users input when they fill in the password 
+  public void keyTyped() {
 
-  if (Entered == false) {
+    // sees if the user has enterted into the garden area 
+    if (Entered == false) {
 
+      // allows the user to delete their entry if it is incorrect 
       if (key == BACKSPACE) {
 
         Password = "";
         background(0);
 
-    } else {
+      } else {
 
-      Password += key;
+        Password += key;
 
     }
 
-  } else if (Entered == true) {
-    
+    // turns this method off once the password has been entered 
+    } else if (Entered == true) {
+      
+    }
   }
-}
 
-
-
-  // key event
+  // is used to detect it the user is holding down a specific key to adjust the sun 
   public void keyPressed() {
+
     // key code variable 
     if (keyPressed) {
+
       if (keyCode == UP) {
 
         upPressed = true;
@@ -211,8 +276,9 @@ public void keyTyped() {
     }
   }
 
+  // used to know when the user has let go the key to stop adujsting the sun 
   public void keyReleased() {
-      if (keyCode == UP) {
+    if (keyCode == UP) {
 
         upPressed = false;
 
@@ -243,9 +309,7 @@ public void keyTyped() {
       } else if (key == 'a' || key == 'A') {
 
         APressed = false;
+
+    }
   }
-}
-
-
-  // define other methods down here.
 }
