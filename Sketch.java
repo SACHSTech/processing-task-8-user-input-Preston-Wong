@@ -27,10 +27,10 @@ public class Sketch extends PApplet {
   PImage imgSunFlower;
 
   // sun size and location variables 
-  int intSunSizeX = 10;
-  int intSunSizeY = 10;
-  int intSunX = 0;
-  int intSunY = 0;
+  int intSunSizeX = 20;
+  int intSunSizeY = 20;
+  int intSunX = 10;
+  int intSunY = 10;
 
   // variables that allow the user to adust different aspects of the sun 
   boolean upPressed = false;
